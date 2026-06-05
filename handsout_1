@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一堂：電路的奧秘</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "LiHei Pro", "Hiragino Sans GB", "Microsoft JhengHei", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+        }
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 1px solid #333;
+        }
+        .intro-box {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .analogy-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .analogy-card {
+            flex: 1;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #dcdde1;
+        }
+        .task-box {
+            margin-bottom: 30px;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .drawing-area {
+            border: 2px dashed #bdc3c7;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        @media print {
+            body { background-color: #fff; }
+            .container { box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⚡ 第一堂：電路的奧秘——從點亮燈泡到歐姆定律</h1>
+    
+    <div class="header-info">
+        <div>班級：<span class="blank"></span></div>
+        <div>姓名：<span class="blank"></span></div>
+        <div>日期：<span class="blank"></span></div>
+    </div>
+
+    <!-- 課前暖身區塊 (圖示化) -->
+    <div class="intro-box">
+        <h3>🌟 課前暖身：遇見看不見的能量——「電流」</h3>
+        <p>電線裡跑來跑去的電，就像水管裡流動的水。對照一下，馬上就能懂！</p>
+        <div class="analogy-container">
+            <div class="analogy-card">
+                <h4>💧 水流系統</h4>
+                <p><strong>抽水馬達</strong> (把水推出去)</p>
+                <p>↓</p>
+                <p><strong>水管</strong> (水流的通道)</p>
+                <p>↓</p>
+                <p><strong>水龍頭</strong> (控制開關)</p>
+                <p>↓</p>
+                <p><strong>水車</strong> (被水推動旋轉)</p>
+            </div>
+            <div class="analogy-card">
+                <h4>⚡ 電流系統</h4>
+                <p><strong>電池</strong> (把電推出去)</p>
+                <p>↓</p>
+                <p><strong>導線</strong> (電流的通道)</p>
+                <p>↓</p>
+                <p><strong>開關</strong> (控制放行)</p>
+                <p>↓</p>
+                <p><strong>燈泡</strong> (被電推動發光)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 任務一 -->
+    <div class="task-box">
+        <h2>🔬 任務一：喚醒燈泡 (簡單電路與串並聯)</h2>
+        <p><strong>1. 點亮第一顆燈泡</strong></p>
+        <ul>
+            <li><strong>操作：</strong> 使用電池、開關、一顆小燈泡與導線，連接出一個「通路」。</li>
+            <li><strong>挑戰：</strong> 請在下方畫出你剛剛接好的電路圖。</li>
+        </ul>
+        <div class="drawing-area">請在此處畫出電路圖</div>
+
+        <p><strong>2. 燈泡兄弟的陣型 (串聯 vs. 並聯)</strong></p>
+        <ul>
+            <li><strong>操作：</strong> 嘗試將兩顆燈泡以「串聯（手牽手）」和「並聯（肩並肩）」的方式接上。</li>
+            <li><strong>觀察記錄：</strong>
+                <br>串聯時，燈泡的亮度變得：<span class="blank"></span>
+                <br>並聯時，燈泡的亮度變得：<span class="blank"></span>
+            </li>
+            <li><strong>測試：</strong> 若把其中一顆燈泡轉鬆（模擬燒壞），另一顆燈泡會怎樣？
+                <br>串聯狀態下：<span class="blank"></span>
+                <br>並聯狀態下：<span class="blank"></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 任務二 -->
+    <div class="task-box">
+        <h2>🔬 任務二：電池的疊加魔法 (電池組規律)</h2>
+        <div class="note">💡 生活連結：遙控器通常裝兩顆串聯電池，為什麼？來量量看吧！</div>
+        <ul>
+            <li>測量單一顆電池的電壓：V₁ = <span class="blank" style="min-width: 50px;"></span> V</li>
+            <li>兩顆電池「串聯」，總電壓：V串 = <span class="blank" style="min-width: 50px;"></span> V</li>
+            <li>兩顆電池「並聯」，總電壓：V並 = <span class="blank" style="min-width: 50px;"></span> V</li>
+        </ul>
+        <p><strong>結論：</strong> 電池串聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>；電池並聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>。</p>
+    </div>
+
+    <!-- 任務三 -->
+    <div class="task-box">
+        <h2>🔬 任務三：探究電路規律 (電壓與電流)</h2>
+        <div class="note">⚠️ 警告：使用電表時，紅接正、黑接負。電流表串聯，電壓表並聯。先試觸再固定！</div>
+        
+        <p><strong>1. 串聯電壓探密：</strong></p>
+        <p>V₁ = <span class="blank" style="min-width: 40px;"></span> V , V₂ = <span class="blank" style="min-width: 40px;"></span> V , 總電壓 V總 = <span class="blank" style="min-width: 40px;"></span> V</p>
+        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
+
+        <p><strong>2. 並聯電流探密：</strong></p>
+        <p>I₁ = <span class="blank" style="min-width: 40px;"></span> A , I₂ = <span class="blank" style="min-width: 40px;"></span> A , 總電流 I總 = <span class="blank" style="min-width: 40px;"></span> A</p>
+        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
+    </div>
+
+    <!-- 任務四 -->
+    <div class="task-box">
+        <h2>🔬 任務四：控制電流的魔法棒 (滑動變阻器)</h2>
+        <ul>
+            <li><strong>操作：</strong> 將變阻器「一上一下」串聯接進燈泡電路中。</li>
+            <li><strong>觀察：</strong>
+                <br>電阻線變長 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
+                <br>電阻線變短 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
+            </li>
+        </ul>
+    </div>
+
+    <!-- 任務五 -->
+    <div class="task-box">
+        <h2>🔬 任務五：電學聖杯 (驗證歐姆定律)</h2>
+        <p>利用滑動變阻器改變「固定電阻 (R)」兩端的電壓，記錄對應的電流。</p>
+        <p><strong>固定電阻 R = <span class="blank" style="min-width: 40px;"></span> Ω</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>測量次數</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>電壓 V (伏特)</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>電流 I (安培)</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>V ÷ I 的比值</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>🏆 最終結論 (歐姆定律)：</strong><br>當電阻固定時，通過導體的電流與其兩端的電壓成 <span class="blank" style="min-width: 80px;"></span>。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
