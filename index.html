@@ -1,121 +1,221 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第一堂：電路的奧秘</title>
+    <title>電路學實作講義：麵包板上的微型城市</title>
     <style>
+        /* 全域基本設定 */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
         body {
-            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "LiHei Pro", "Hiragino Sans GB", "Microsoft JhengHei", Arial, sans-serif;
+            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "LiHei Pro", "Microsoft JhengHei", Arial, sans-serif;
+            font-size: 11pt;
             line-height: 1.6;
-            color: #333;
+            color: #2c3e50;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .page-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
-        }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            border-left: 5px solid #3498db;
-            padding-left: 10px;
-        }
-        .header-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        .blank {
-            display: inline-block;
-            min-width: 100px;
-            border-bottom: 1px solid #333;
+            padding: 30px 20px;
         }
         
-        /* 避免被切分的關鍵設定 */
-        .keep-together {
-            page-break-inside: avoid; /* 舊版瀏覽器支援 */
-            break-inside: avoid;      /* 現代瀏覽器支援 */
+        /* 標題與視覺裝飾 */
+        .main-title {
+            text-align: center;
+            font-size: 20pt;
+            color: #1a3a5f;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 12pt;
+            color: #5a738e;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        
+        /* 學生基本資訊橫條 */
+        .student-info-table {
+            width: 100%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+        }
+        .student-info-table td {
+            border: none;
+            padding: 8px;
+            font-size: 11pt;
+            text-align: left;
+            width: 33.3%;
+        }
+        .underline-input {
+            display: inline-block;
+            width: 120px;
+            border-bottom: 1px solid #2c3e50;
+            margin-left: 5px;
+            vertical-align: bottom;
+            height: 20px;
         }
 
-        .intro-box {
-            background-color: #e8f4f8;
+        /* 區塊防切分設定（重要列印規則） */
+        .keep-together {
+            page-break-inside: avoid;
+            break-inside: avoid;
+            margin-bottom: 25px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
             padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
         }
-        .analogy-container {
-            display: flex;
-            gap: 20px;
+        
+        h2 {
+            font-size: 14pt;
+            color: #1a3a5f;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-left: 5px solid #3182ce;
+            padding-left: 10px;
+            padding-bottom: 2px;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            color: #2c5282;
             margin-top: 15px;
+            margin-bottom: 10px;
         }
-        .analogy-card {
-            flex: 1;
-            background: #fff;
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 0 0 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* 表格樣式修正（禁止使用Flex，採用純Table佈局） */
+        .layout-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 15px 0;
+            margin: 15px 0;
+        }
+        .layout-cell {
+            vertical-align: top;
+            background: #f7fafc;
+            border: 1px solid #edf2f7;
+            border-radius: 6px;
             padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border: 1px solid #dcdde1;
+            width: 50%;
         }
-        .task-box {
-            margin-bottom: 30px;
-        }
-        .note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 0.9em;
-        }
-        table {
+
+        .data-table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
         }
-        th, td {
-            border: 1px solid #bdc3c7;
+        .data-table th, .data-table td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            text-align: center;
+            font-size: 10.5pt;
+        }
+        .data-table th {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+
+        /* 填答底線 */
+        .answer-blank {
+            display: inline-block;
+            min-width: 60px;
+            border-bottom: 1px solid #4a5568;
+            text-align: center;
+            margin: 0 4px;
+            padding: 0 5px;
+        }
+        .answer-line-long {
+            display: block;
+            width: 100%;
+            border-bottom: 1px solid #cbd5e0;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* 提示框與繪圖區 */
+        .alert-box {
+            background-color: #fffaf0;
+            border-left: 4px solid #dd6b20;
             padding: 12px;
+            margin: 12px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 10.5pt;
+        }
+        .alert-title {
+            font-weight: bold;
+            color: #dd6b20;
+            margin-bottom: 4px;
+        }
+        .drawing-box {
+            border: 2px dashed #cbd5e0;
+            height: 180px;
+            border-radius: 6px;
+            background-color: #fafafa;
+            margin: 15px 0;
+            text-align: center;
+            line-height: 180px;
+            color: #a0aec0;
+            font-size: 11pt;
+        }
+
+        /* 向量電路圖與示意圖容器 */
+        .diagram-container {
+            text-align: center;
+            margin: 15px 0;
+            background: #ffffff;
+            padding: 10px;
+        }
+        .diagram-caption {
+            font-size: 9.5pt;
+            color: #718096;
+            margin-top: 5px;
             text-align: center;
         }
-        th {
-            background-color: #f8f9fa;
-        }
-        .drawing-area {
-            border: 2px dashed #bdc3c7;
-            height: 150px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7f8c8d;
-            margin: 15px 0;
-        }
-        
-        /* 列印專屬設定 */
+
+        /* 列印最佳化 */
         @media print {
-            body { 
-                background-color: #fff; 
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .page-container {
                 padding: 0;
+                max-width: 100%;
             }
-            .container { 
-                box-shadow: none; 
-                padding: 0; 
+            .keep-together {
+                border: 1px solid #cbd5e0;
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
-            /* 確保在列印時背景顏色會顯現 (部分瀏覽器預設會隱藏背景色以省墨) */
-            .intro-box, th, .note {
+            .alert-box {
+                background-color: #fffaf0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .data-table th {
+                background-color: #ebf8ff !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -124,392 +224,270 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>⚡ 第一堂：電路的奧秘——從點亮燈泡到歐姆定律</h1>
+<div class="page-container">
+    <div class="main-title">⚡ 麵包板上的微型城市</div>
+    <div class="subtitle">基礎電路實作與控制邏輯學習手冊</div>
     
-    <div class="header-info keep-together">
-        <div>班級：<span class="blank"></span></div>
-        <div>姓名：<span class="blank"></span></div>
-        <div>日期：<span class="blank"></span></div>
-    </div>
+    <table class="student-info-table">
+        <tr>
+            <td><strong>班級：</strong><span class="underline-input"></span></td>
+            <td><strong>姓名：</strong><span class="underline-input"></span></td>
+            <td><strong>日期：</strong><span class="underline-input"></span></td>
+        </tr>
+    </table>
 
-    <div class="intro-box keep-together">
-        <h3>🌟 課前暖身：遇見看不見的能量——「電流」</h3>
-        <p>電線裡跑來跑去的電，就像水管裡流動的水。對照一下，馬上就能懂！</p>
-        <div class="analogy-container">
-            <div class="analogy-card">
-                <h4>💧 水流系統</h4>
-                <p><strong>抽水馬達</strong> (把水推出去)</p>
-                <p>↓</p>
-                <p><strong>水管</strong> (水流的通道)</p>
-                <p>↓</p>
-                <p><strong>水龍頭</strong> (控制開關)</p>
-                <p>↓</p>
-                <p><strong>水車</strong> (被水推動旋轉)</p>
-            </div>
-            <div class="analogy-card">
-                <h4>⚡ 電流系統</h4>
-                <p><strong>電池</strong> (把電推出去)</p>
-                <p>↓</p>
-                <p><strong>導線</strong> (電流的通道)</p>
-                <p>↓</p>
-                <p><strong>開關</strong> (控制放行)</p>
-                <p>↓</p>
-                <p><strong>燈泡</strong> (被電推動發光)</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="task-box keep-together">
-        <h2>🔬 任務一：喚醒燈泡 (簡單電路與串並聯)</h2>
-        <p><strong>1. 點亮第一顆燈泡</strong></p>
-        <ul>
-            <li><strong>操作：</strong> 使用電池、開關、一顆小燈泡與導線，連接出一個「通路」。</li>
-            <li><strong>挑戰：</strong> 請在下方畫出你剛剛接好的電路圖。</li>
-        </ul>
-        <div class="drawing-area">請在此處畫出電路圖</div>
-
-        <p><strong>2. 燈泡兄弟的陣型 (串聯 vs. 並聯)</strong></p>
-        <ul>
-            <li><strong>操作：</strong> 嘗試將兩顆燈泡以「串聯（手牽手）」和「並聯（肩並肩）」的方式接上。</li>
-            <li><strong>觀察記錄：</strong>
-                <br>串聯時，燈泡的亮度變得：<span class="blank"></span>
-                <br>並聯時，燈泡的亮度變得：<span class="blank"></span>
-            </li>
-            <li><strong>測試：</strong> 若把其中一顆燈泡轉鬆（模擬燒壞），另一顆燈泡會怎樣？
-                <br>串聯狀態下：<span class="blank"></span>
-                <br>並聯狀態下：<span class="blank"></span>
-            </li>
-        </ul>
-    </div>
-
-    <div class="task-box keep-together">
-        <h2>🔬 任務二：電池的疊加魔法 (電池組規律)</h2>
-        <div class="note">💡 生活連結：遙控器通常裝兩顆串聯電池，為什麼？來量量看吧！</div>
-        <ul>
-            <li>測量單一顆電池的電壓：V₁ = <span class="blank" style="min-width: 50px;"></span> V</li>
-            <li>兩顆電池「串聯」，總電壓：V串 = <span class="blank" style="min-width: 50px;"></span> V</li>
-            <li>兩顆電池「並聯」，總電壓：V並 = <span class="blank" style="min-width: 50px;"></span> V</li>
-        </ul>
-        <p><strong>結論：</strong> 電池串聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>；電池並聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>。</p>
-    </div>
-
-    <div class="task-box keep-together">
-        <h2>🔬 任務三：探究電路規律 (電壓與電流)</h2>
-        <div class="note">⚠️ 警告：使用電表時，紅接正、黑接負。電流表串聯，電壓表並聯。先試觸再固定！</div>
+    <div class="keep-together">
+        <h2>1. 課前暖身：遇見看不見的能量——「電流」</h2>
+        <p>在我們打開開關、點亮燈泡之前，先來想像一個我們在生活中非常熟悉的系統：<strong>水管與水流</strong>。電線裡跑來跑去的電，其實運作方式跟水流一模一樣喔！</p>
         
-        <p><strong>1. 串聯電壓探密：</strong></p>
-        <p>V₁ = <span class="blank" style="min-width: 40px;"></span> V , V₂ = <span class="blank" style="min-width: 40px;"></span> V , 總電壓 V總 = <span class="blank" style="min-width: 40px;"></span> V</p>
-        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
-
-        <p><strong>2. 並聯電流探密：</strong></p>
-        <p>I₁ = <span class="blank" style="min-width: 40px;"></span> A , I₂ = <span class="blank" style="min-width: 40px;"></span> A , 總電流 I總 = <span class="blank" style="min-width: 40px;"></span> A</p>
-        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
+        <table class="layout-table">
+            <tr>
+                <td class="layout-cell">
+                    <h3 style="color:#2b6cb0;margin-top:0;text-align:center;">💧 水流系統</h3>
+                    <p><strong>• 抽水馬達：</strong>負責用力把水推出去，是水流的動力來源。</p>
+                    <p><strong>• 水管：</strong>提供一個封閉且安全的專屬通道讓水流動。</p>
+                    <p><strong>• 閘門/水龍頭：</strong>控制通道。打開時水流過，關閉時水流中斷。</p>
+                    <p><strong>• 水車：</strong>當強大的水流衝過去時，會推動水車旋轉，產生能量。</p>
+                    <p><strong>• 窄管/減速丘：</strong>把水管變細，可以限制水流不要衝得太快。</p>
+                </td>
+                <td class="layout-cell">
+                    <h3 style="color:#c53030;margin-top:0;text-align:center;">⚡ 電流系統</h3>
+                    <p><strong>• 電池 (電池盒)：</strong>負責提供推動力，把電荷推向導線。</p>
+                    <p><strong>• 導線/跳線：</strong>提供一條讓電流跑動的無阻礙金屬通道。</p>
+                    <p><strong>• 開關：</strong>控制電路的相通。按下是通路，放開是斷路。</p>
+                    <p><strong>• LED 發光二極體：</strong>電流流過時會消耗電能，轉化成美麗的光。</p>
+                    <p><strong>• 電阻器：</strong>阻擋多餘的電流，保護 LED 燈泡不被瞬間衝壞。</p>
+                </td>
+            </tr>
+        </table>
+        <p>今天，每一位同學都是這座「微型城市」的電力工程師。我們要用雙手引導電流，打造出安全、好玩的控制系統！</p>
     </div>
 
-    <div class="task-box keep-together">
-        <h2>🔬 任務四：控制電流的魔法棒 (滑動變阻器)</h2>
+    <div class="keep-together">
+        <h2>2. 任務一：點亮第一道光 (基礎電路實作)</h2>
+        <p>請拿出<strong>麵包板、電池盒、電阻器、跳線</strong>以及<strong>1顆LED燈泡</strong>。跟著老師的步驟，在麵包板上接出一模一樣的基礎電路。</p>
+        
+        <div class="alert-box">
+            <div class="alert-title">⚠️ 工程師的通電前安全檢查清單 (極重要！)</div>
+            <ol style="margin-bottom:0;">
+                <li><strong>LED 的腳有分長短：</strong>長腳必須接在靠近電池「正極(紅線)」的方向；短腳必須接在靠近「負極(黑線)」的方向。接反了絕對不會亮喔！</li>
+                <li><strong>一定要串聯電阻器：</strong>我們的電池提供 3V 的推力，如果不加電阻直接接上 LED，高強度的電流會在一瞬間讓 LED 燒毀！</li>
+            </ol>
+        </div>
+
+        <div class="diagram-container">
+            <svg viewBox="0 0 600 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+                <rect x="180" y="20" width="380" height="130" fill="#f7fafc" stroke="#cbd5e0" stroke-width="2" rx="5"/>
+                <g fill="#a0aec0">
+                    <circle cx="200" cy="35" r="3"/> <circle cx="220" cy="35" r="3"/> <circle cx="240" cy="35" r="3"/> <circle cx="260" cy="35" r="3"/> <circle cx="280" cy="35" r="3"/>
+                    <circle cx="300" cy="35" r="3"/> <circle cx="320" cy="35" r="3"/> <circle cx="340" cy="35" r="3"/> <circle cx="360" cy="35" r="3"/> <circle cx="380" cy="35" r="3"/>
+                    <circle cx="200" cy="135" r="3"/> <circle cx="220" cy="135" r="3"/> <circle cx="240" cy="135" r="3"/> <circle cx="260" cy="135" r="3"/> <circle cx="280" cy="135" r="3"/>
+                    <circle cx="260" cy="65" r="3"/> <circle cx="260" cy="80" r="3"/> <circle cx="260" cy="95" r="3"/>
+                    <circle cx="340" cy="65" r="3"/> <circle cx="340" cy="80" r="3"/> <circle cx="340" cy="95" r="3"/>
+                    <circle cx="420" cy="65" r="3"/> <circle cx="420" cy="80" r="3"/> <circle cx="420" cy="95" r="3"/>
+                </g>
+                <path d="M 30 85 L 100 85" stroke="#e53e3e" stroke-width="3" fill="none"/>
+                <path d="M 30 105 L 100 105" stroke="#2d3748" stroke-width="3" fill="none"/>
+                <rect x="30" y="65" width="70" height="50" fill="#4a5568" rx="3"/>
+                <text x="65" y="95" fill="#ffffff" font-size="10" text-anchor="middle">3V 電池盒</text>
+                
+                <path d="M 100 85 C 150 85, 150 35, 200 35" stroke="#e53e3e" stroke-width="2.5" fill="none"/>
+                <path d="M 100 105 C 150 105, 150 135, 200 135" stroke="#2d3748" stroke-width="2.5" fill="none"/>
+                <text x="140" y="55" fill="#e53e3e" font-size="10">正極 (紅)</text>
+                <text x="140" y="125" fill="#2d3748" font-size="10">負極 (黑)</text>
+                
+                <path d="M 260 35 C 260 45, 260 50, 260 65" stroke="#3182ce" stroke-width="2" fill="none"/>
+                <rect x="275" y="60" width="50" height="10" fill="#e2e8f0" stroke="#4a5568" rx="2"/>
+                <path d="M 260 65 L 275 65 M 325 65 L 340 65" stroke="#4a5568" stroke-width="1.5"/>
+                <line x1="285" y1="60" x2="285" y2="70" stroke="#a0aec0" stroke-width="2"/>
+                <line x1="295" y1="60" x2="295" y2="70" stroke="#000000" stroke-width="2"/>
+                <line x1="305" y1="60" x2="305" y2="70" stroke="#e53e3e" stroke-width="2"/>
+                
+                <path d="M 340 80 C 340 80, 345 80, 350 80" stroke="#e53e3e" stroke-width="1.5" fill="none"/>
+                <circle cx="420" cy="80" r="8" fill="#feb2b2" stroke="#e53e3e" stroke-width="2"/>
+                <path d="M 340 80 L 412 80" stroke="#cbd5e0" stroke-width="1.5"/>
+                <path d="M 420 80 L 420 135" stroke="#cbd5e0" stroke-width="1.5"/>
+                <text x="425" y="115" fill="#718096" font-size="10">短腳(負)</text>
+                <text x="370" y="75" fill="#718096" font-size="10">長腳(正)</text>
+            </svg>
+            <div class="diagram-caption">圖 2.1：第一個麵包板迴路實作參考圖（注意元件與孔位的對應關係）</div>
+        </div>
+
+        <p>👉 <strong>動手實測記錄：</strong> 順利接完電路並開啟電池盒開關後，你的 LED 燈泡有沒有發光？ <span class="answer-blank"></span> (有 / 沒有)</p>
+    </div>
+
+    <div class="keep-together">
+        <h2>3. 深度解析：我們剛剛做了什麼？</h2>
+        <p>為什麼零件插進孔洞裡不用焊接就會導電？秘密就在麵包板內部的金屬結構！</p>
+        
+        <h3>🔍 秘密一：麵包板的隱形金屬夾片</h3>
+        <p>如果拆開麵包板的底層，你會發現裡面的孔洞其實是由金屬導電夾片連在一起的：</p>
         <ul>
-            <li><strong>操作：</strong> 將變阻器「一上一下」串聯接進燈泡電路中。</li>
-            <li><strong>觀察：</strong>
-                <br>電阻線變長 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
-                <br>電阻線變短 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
-            </li>
+            <li><strong>中央零件區（直排相通）：</strong> 每一組由上下分開的 <strong>5 個直排小洞（例如 A-B-C-D-E）</strong> 在底層是由同一條金屬夾片貫穿。所以，只要把不同零件插在「同一組直排洞」裡，它們在電路上就碰在一起了！</li>
+            <li><strong>兩側電源軌（橫向長條）：</strong> 標示紅線(+)與藍線(-)的長條孔洞，則是整個<strong>橫向一路相通</strong>的。這就如同城市的供電主幹道，方便隨時拉線接電。</li>
         </ul>
-    </div>
 
-    <div class="task-box keep-together">
-        <h2>🔬 任務五：電學聖杯 (驗證歐姆定律)</h2>
-        <p>利用滑動變阻器改變「固定電阻 (R)」兩端的電壓，記錄對應的電流。</p>
-        <p><strong>固定電阻 R = <span class="blank" style="min-width: 40px;"></span> Ω</strong></p>
-        <table>
+        <div class="diagram-container">
+            <svg viewBox="0 0 500 130" width="100%" height="130" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="5" width="480" height="120" fill="#ffffff" stroke="#cbd5e0" stroke-width="1.5" rx="4"/>
+                <rect x="25" y="15" width="450" height="12" fill="#fed7d7" rx="3"/>
+                <line x1="30" y1="21" x2="470" y2="21" stroke="#e53e3e" stroke-width="1.5" stroke-dasharray="4,4"/>
+                <text x="440" y="13" fill="#e53e3e" font-size="8">橫向連通電源軌 (+)</text>
+                
+                <rect x="55" y="40" width="14" height="70" fill="#ebf8ff" rx="2"/>
+                <line x1="62" y1="45" x2="62" y2="105" stroke="#3182ce" stroke-width="1.5" stroke-dasharray="4,4"/>
+                
+                <rect x="125" y="40" width="14" height="70" fill="#ebf8ff" rx="2"/>
+                <line x1="132" y1="45" x2="132" y2="105" stroke="#3182ce" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+                <g fill="#4a5568">
+                    <circle cx="62" cy="48" r="2.5"/> <circle cx="62" cy="62" r="2.5"/> <circle cx="62" cy="76" r="2.5"/> <circle cx="62" cy="90" r="2.5"/> <circle cx="62" cy="104" r="2.5"/>
+                    <circle cx="132" cy="48" r="2.5"/> <circle cx="132" cy="62" r="2.5"/> <circle cx="132" cy="76" r="2.5"/> <circle cx="132" cy="90" r="2.5"/> <circle cx="132" cy="104" r="2.5"/>
+                </g>
+                <text x="85" y="78" fill="#3182ce" font-size="9">直排5孔</text>
+                <text x="85" y="92" fill="#3182ce" font-size="9">內部相通</text>
+                
+                <rect x="240" y="45" width="220" height="60" fill="#f7fafc" stroke="#e2e8f0" rx="4"/>
+                <text x="250" y="65" fill="#4a5568" font-size="9.5" font-weight="bold">思考題：</text>
+                <text x="250" y="85" fill="#4a5568" font-size="9.5">如果把電阻的兩隻腳插在「同一個</text>
+                <text x="250" y="100" fill="#4a5568" font-size="9.5">直排五孔」內，會發生什麼事？</text>
+            </svg>
+            <div class="diagram-caption">圖 3.1：麵包板底層導電夾片連通方向示意圖</div>
+        </div>
+
+        <h3>🔍 秘密二：解密電阻身上的色彩密碼</h3>
+        <p>電阻器體積太小，無法印上數字，所以科學家發明了色碼。請跟著老師背誦色碼口訣：</p>
+        <p style="text-align:center;font-weight:bold;color:#2b6cb0;font-size:12pt;">🌈 黑 棕 紅 橙 黃，綠 藍 紫 灰 白</p>
+        <p style="text-align:center;color:#4a5568;font-size:10pt;margin-top:-5px;">對應數字：0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9</p>
+        
+        <p>常規的四環電阻判讀方式：第一、二環代表「主要數字」，第三環代表「後面要加幾個零（乘數）」，第四環通常是金色或銀色，代表「誤差值」。</p>
+        
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th>測量次數</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
+                    <th>電阻外觀範例</th>
+                    <th>第一色環 (十位)</th>
+                    <th>第二色環 (個位)</th>
+                    <th>第三色環 (百萬倍)</th>
+                    <th>計算出的電阻值</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>電壓 V (伏特)</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="font-weight:bold;color:#b7791f;">棕 · 黑 · 棕 · 金</td>
+                    <td>棕 (1)</td>
+                    <td>黑 (0)</td>
+                    <td>棕 (後面加 1 個 0)</td>
+                    <td><strong>100 Ω</strong> (歐姆)</td>
                 </tr>
                 <tr>
-                    <td><strong>電流 I (安培)</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="font-weight:bold;color:#e53e3e;">紅 · 紅 · 棕 · 金</td>
+                    <td>紅 (2)</td>
+                    <td>紅 (2)</td>
+                    <td>棕 (後面加 1 個 0)</td>
+                    <td><strong>220 Ω</strong> (歐姆)</td>
                 </tr>
                 <tr>
-                    <td><strong>V ÷ I 的比值</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td style="font-weight:bold;color:#dd6b20;">橘 · 橘 · 棕 · 金</td>
+                    <td>橘 (3)</td>
+                    <td>橘 (3)</td>
+                    <td>棕 (後面加 1 個 0)</td>
+                    <td><strong>330 Ω</strong> (歐姆)</td>
                 </tr>
             </tbody>
         </table>
-        <p><strong>🏆 最終結論 (歐姆定律)：</strong><br>當電阻固定時，通過導體的電流與其兩端的電壓成 <span class="blank" style="min-width: 80px;"></span>。</p>
+        <p>👉 <strong>找一找、看一看：</strong> 仔細端詳老師發給你接在電路中的這顆電阻，它身上的前三道顏色分別是什麼？</p>
+        <p>答：第一環是 <span class="answer-blank"></span>，第二環是 <span class="answer-blank"></span>，第三環是 <span class="answer-blank"></span>，因此這顆電阻的阻值是 <span class="answer-blank" style="min-width:80px;"></span> 歐姆。</p>
     </div>
 
-</div>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第一堂：電路的奧秘</title>
-    <style>
-        body {
-            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "LiHei Pro", "Hiragino Sans GB", "Microsoft JhengHei", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
-        }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            border-left: 5px solid #3498db;
-            padding-left: 10px;
-        }
-        .header-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        .blank {
-            display: inline-block;
-            min-width: 100px;
-            border-bottom: 1px solid #333;
-        }
-        .intro-box {
-            background-color: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        .analogy-container {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        .analogy-card {
-            flex: 1;
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border: 1px solid #dcdde1;
-        }
-        .task-box {
-            margin-bottom: 30px;
-        }
-        .note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 0.9em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th, td {
-            border: 1px solid #bdc3c7;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f8f9fa;
-        }
-        .drawing-area {
-            border: 2px dashed #bdc3c7;
-            height: 150px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7f8c8d;
-            margin: 15px 0;
-        }
-        @media print {
-            body { background-color: #fff; }
-            .container { box-shadow: none; padding: 0; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>⚡ 第一堂：電路的奧秘——從點亮燈泡到歐姆定律</h1>
-    
-    <div class="header-info">
-        <div>班級：<span class="blank"></span></div>
-        <div>姓名：<span class="blank"></span></div>
-        <div>日期：<span class="blank"></span></div>
-    </div>
-
-    <!-- 課前暖身區塊 (圖示化) -->
-    <div class="intro-box">
-        <h3>🌟 課前暖身：遇見看不見的能量——「電流」</h3>
-        <p>電線裡跑來跑去的電，就像水管裡流動的水。對照一下，馬上就能懂！</p>
-        <div class="analogy-container">
-            <div class="analogy-card">
-                <h4>💧 水流系統</h4>
-                <p><strong>抽水馬達</strong> (把水推出去)</p>
-                <p>↓</p>
-                <p><strong>水管</strong> (水流的通道)</p>
-                <p>↓</p>
-                <p><strong>水龍頭</strong> (控制開關)</p>
-                <p>↓</p>
-                <p><strong>水車</strong> (被水推動旋轉)</p>
-            </div>
-            <div class="analogy-card">
-                <h4>⚡ 電流系統</h4>
-                <p><strong>電池</strong> (把電推出去)</p>
-                <p>↓</p>
-                <p><strong>導線</strong> (電流的通道)</p>
-                <p>↓</p>
-                <p><strong>開關</strong> (控制放行)</p>
-                <p>↓</p>
-                <p><strong>燈泡</strong> (被電推動發光)</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 任務一 -->
-    <div class="task-box">
-        <h2>🔬 任務一：喚醒燈泡 (簡單電路與串並聯)</h2>
-        <p><strong>1. 點亮第一顆燈泡</strong></p>
-        <ul>
-            <li><strong>操作：</strong> 使用電池、開關、一顆小燈泡與導線，連接出一個「通路」。</li>
-            <li><strong>挑戰：</strong> 請在下方畫出你剛剛接好的電路圖。</li>
-        </ul>
-        <div class="drawing-area">請在此處畫出電路圖</div>
-
-        <p><strong>2. 燈泡兄弟的陣型 (串聯 vs. 並聯)</strong></p>
-        <ul>
-            <li><strong>操作：</strong> 嘗試將兩顆燈泡以「串聯（手牽手）」和「並聯（肩並肩）」的方式接上。</li>
-            <li><strong>觀察記錄：</strong>
-                <br>串聯時，燈泡的亮度變得：<span class="blank"></span>
-                <br>並聯時，燈泡的亮度變得：<span class="blank"></span>
-            </li>
-            <li><strong>測試：</strong> 若把其中一顆燈泡轉鬆（模擬燒壞），另一顆燈泡會怎樣？
-                <br>串聯狀態下：<span class="blank"></span>
-                <br>並聯狀態下：<span class="blank"></span>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 任務二 -->
-    <div class="task-box">
-        <h2>🔬 任務二：電池的疊加魔法 (電池組規律)</h2>
-        <div class="note">💡 生活連結：遙控器通常裝兩顆串聯電池，為什麼？來量量看吧！</div>
-        <ul>
-            <li>測量單一顆電池的電壓：V₁ = <span class="blank" style="min-width: 50px;"></span> V</li>
-            <li>兩顆電池「串聯」，總電壓：V串 = <span class="blank" style="min-width: 50px;"></span> V</li>
-            <li>兩顆電池「並聯」，總電壓：V並 = <span class="blank" style="min-width: 50px;"></span> V</li>
-        </ul>
-        <p><strong>結論：</strong> 電池串聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>；電池並聯時，總電壓會 <span class="blank" style="min-width: 50px;"></span>。</p>
-    </div>
-
-    <!-- 任務三 -->
-    <div class="task-box">
-        <h2>🔬 任務三：探究電路規律 (電壓與電流)</h2>
-        <div class="note">⚠️ 警告：使用電表時，紅接正、黑接負。電流表串聯，電壓表並聯。先試觸再固定！</div>
+    <div class="keep-together">
+        <h2>4. 任務二：電路上的交通狀況 (電阻的串聯與並聯)</h2>
+        <p>如果我們在電流的必經之路上設置更多個「減速丘（電阻）」，燈泡的亮度會產生什麼變化？讓我們實際動手量測與觀察！</p>
         
-        <p><strong>1. 串聯電壓探密：</strong></p>
-        <p>V₁ = <span class="blank" style="min-width: 40px;"></span> V , V₂ = <span class="blank" style="min-width: 40px;"></span> V , 總電壓 V總 = <span class="blank" style="min-width: 40px;"></span> V</p>
-        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
+        <h3>⚙️ A. 串聯實驗 (手牽手，接成一條單行道)</h3>
+        <p><strong>操作步驟：</strong> 把第一顆電阻的尾巴與第二顆電阻的頭插在「同一個 5 孔直排」中，讓電流必須依序通過這兩顆電阻，才能流入 LED 燈泡。</p>
+        <p>👉 <strong>觀察記錄：</strong> 與原本只有一顆電阻時相比，LED 燈泡的亮度變得：<span class="answer-blank" style="min-width:100px;"></span> (更亮 / 更暗 / 不變)。</p>
+        <p>💡 <strong>科學原理：</strong> 電阻串聯就像是把減速丘一個接一個排在單行道上。路徑變長了，總阻力<strong>變大</strong>，導致通過的電流<strong>變小</strong>。</p>
 
-        <p><strong>2. 並聯電流探密：</strong></p>
-        <p>I₁ = <span class="blank" style="min-width: 40px;"></span> A , I₂ = <span class="blank" style="min-width: 40px;"></span> A , 總電流 I總 = <span class="blank" style="min-width: 40px;"></span> A</p>
-        <p>👉 規律發現：<span class="blank" style="min-width: 300px;"></span></p>
+        <h3>⚙️ B. 並聯實驗 (肩並肩，挖出雙向新馬路)</h3>
+        <p><strong>操作步驟：</strong> 把第二顆電阻的兩隻腳，分別插在與第一顆電阻「一模一樣的兩組直排孔」中，讓這兩顆電阻呈現平行的狀態，電流可以選擇走左邊這顆，也可以走右邊那顆。</p>
+        <p>👉 <strong>觀察記錄：</strong> 與剛剛的串聯相比，此時 LED 燈泡的亮度變得：<span class="answer-blank" style="min-width:100px;"></span> (更亮 / 更暗 / 不變)。</p>
+        <p>💡 <strong>科學原理：</strong> 電阻並聯就像是在擁擠的馬路旁拓寬一條新車道。電流有更多通道可以同時前進，整體的總阻力反而<strong>變小</strong>了，因此總電流<strong>變大</strong>！</p>
     </div>
 
-    <!-- 任務四 -->
-    <div class="task-box">
-        <h2>🔬 任務四：控制電流的魔法棒 (滑動變阻器)</h2>
-        <ul>
-            <li><strong>操作：</strong> 將變阻器「一上一下」串聯接進燈泡電路中。</li>
-            <li><strong>觀察：</strong>
-                <br>電阻線變長 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
-                <br>電阻線變短 ➔ 電阻變 <span class="blank" style="min-width: 40px;"></span> ➔ 燈泡變 <span class="blank" style="min-width: 40px;"></span>。
-            </li>
-        </ul>
-    </div>
+    <div class="keep-together">
+        <h2>5. 任務三：控制水流的閘門 (輕觸開關的應用)</h2>
+        <p>現在我們的燈泡一開電就會一直亮著。如果我們想做一台可以控制發光訊號的「摩斯密碼發報機」，就需要裝上一個電路的控制閘門——<strong>輕觸按鈕開關 (Tact Switch)</strong>。</p>
+        
+        <div class="alert-box">
+            <div class="alert-title">🔍 輕觸開關的 4 腳連通秘密</div>
+            <p>這種方形按鈕擁有 4 支腳，在還沒按下按鈕時，它的內部是<strong>左邊兩腳相通、右邊兩腳相通</strong>，但左右彼此是不通的。為了確保接線不會出錯，最保險的祕訣就是採用<strong>「對角線接法」</strong>（把一條導線接在左上角，另一條接在右下角）。</p>
+        </div>
 
-    <!-- 任務五 -->
-    <div class="task-box">
-        <h2>🔬 任務五：電學聖杯 (驗證歐姆定律)</h2>
-        <p>利用滑動變阻器改變「固定電阻 (R)」兩端的電壓，記錄對應的電流。</p>
-        <p><strong>固定電阻 R = <span class="blank" style="min-width: 40px;"></span> Ω</strong></p>
-        <table>
+        <p><strong>操作步驟：</strong> 請把原本從電池正極出發到電阻器之間的導線「拔掉」，將開關跨接在中間。讓電流從對角線的一端流入開關，再從另一端流出回到電阻器與 LED 燈。此時，開關成了電流唯一的驗票閘門。</p>
+        
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th>測量次數</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
+                    <th style="width: 50%;">開關狀態</th>
+                    <th style="width: 50%;">LED 燈泡的反應 (亮 / 滅)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>電壓 V (伏特)</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>手指「沒有按下」按鈕時</strong></td>
+                    <td><span class="answer-blank" style="min-width:80px;"></span></td>
                 </tr>
                 <tr>
-                    <td><strong>電流 I (安培)</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><strong>V ÷ I 的比值</strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><strong>手指「用力按下」按鈕時</strong></td>
+                    <td><span class="answer-blank" style="min-width:80px;"></span></td>
                 </tr>
             </tbody>
         </table>
-        <p><strong>🏆 最終結論 (歐姆定律)：</strong><br>當電阻固定時，通過導體的電流與其兩端的電壓成 <span class="blank" style="min-width: 80px;"></span>。</p>
     </div>
 
+    <div class="keep-together">
+        <h2>6. 🏆 終極挑戰：十字路口的紅綠燈切換系統</h2>
+        <p>恭喜你走到了最後一關！現在你已經掌握了麵包板、LED 正負極、電阻保護、以及開關的原理。今天你的終極結業任務，是扮演一位交通控制工程師，利用<strong>「三腳滑動開關」</strong>，設計出一個<strong>切換紅綠燈</strong>的自動控制台！</p>
+
+        <div class="alert-box" style="background-color: #f7fafc; border-left-color: #3182ce;">
+            <div class="alert-title" style="color: #2b6cb0;">📋 挑戰任務規格書</div>
+            <ul>
+                <li><strong>元件規格：</strong> 3腳滑動開關 1 個、紅色 LED 1 顆、綠色 LED 1 顆、保護電阻。</li>
+                <li><strong>運作效果：</strong> 當把開關的手柄撥到<strong>左邊</strong>時，只有<strong>紅燈會亮</strong>；當把手柄撥到<strong>右邊</strong>時，只有<strong>綠燈會亮</strong>。在任何情況下，兩顆燈都<strong>絕對不能同時點亮</strong>！</li>
+            </ul>
+        </div>
+
+        <h3>💡 總工程師的設計提示：</h3>
+        <p>1. 三腳滑動開關的內部構造：<strong>「中間那一支腳」是總入口</strong>（要跟電池的正極紅線相連）。當手柄往左撥，中間腳就會跟左邊腳相通；手柄往右撥，中間腳就跟右邊腳相通。</p>
+        <p>2. 請把左邊腳引導出一條獨立馬路，串聯電阻去接紅燈的正極；把右邊腳引導出另一條獨立馬路，串聯電阻去接綠燈的正極。</p>
+        <p>3. 最後，紅燈與綠燈的短腳（負極），都要想辦法接回電池盒的黑線（負極軌），形成圓滿的循環迴路。</p>
+
+        <div class="drawing-box">設計區：在真正動手插線前，先在下方用鉛筆畫出你的電路規劃圖吧！</div>
+        
+        <p style="margin-top:20px;"><strong>👨‍🏫 老師簽名認證欄：</strong></p>
+        <p>當你成功動手切換紅綠燈，且兩燈不會互相干擾時，請舉手請老師過來驗收。通過後由老師在下方蓋章，你就正式完成今天的電路學大師修煉囉！</p>
+        
+        <table style="width:100%; border:none; margin-top:15px;">
+            <tr>
+                <td style="border: 2px solid #cbd5e0; height:80px; width:40%; text-align:center; vertical-align:middle; background:#fafafa; color:#718096;">
+                    驗收合格認證章蓋印處
+                </td>
+                <td style="border:none; width:5%;"></td>
+                <td style="border:none; width:55%; vertical-align:bottom;">
+                    老師評語：<span class="answer-line-long"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 </body>
 </html>
+"""
+
+# 將內容寫入檔案中
+with open("breadboard_circuit_handout.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("HTML file generated successfully.")
