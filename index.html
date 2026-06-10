@@ -101,14 +101,14 @@
             color: var(--wood-dark);
             border-left: 4px solid var(--wood-dark);
             padding-left: 12px;
-            margin: 25px 0 15px;
+            margin: 30px 0 20px;
             font-weight: 600;
         }
 
         h3 {
             font-size: 12pt;
             color: var(--mineral-slate);
-            margin-top: 15px;
+            margin-top: 20px;
             margin-bottom: 10px;
             font-weight: 600;
         }
@@ -157,18 +157,18 @@
             font-size: 10pt;
             letter-spacing: 1px;
         }
-
-        /* 圖片容器樣式 */
+        
         .reference-image-container {
             text-align: center;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         
         .reference-image-container img {
             max-width: 100%;
+            max-height: 350px;
             border: 1px solid var(--wood-light);
             border-radius: 4px;
-            padding: 8px;
+            padding: 10px;
             background: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             object-fit: contain;
@@ -183,7 +183,7 @@
 
         th, td {
             border: 1px solid var(--wood-light);
-            padding: 8px 12px;
+            padding: 10px 12px;
             text-align: center;
         }
 
@@ -204,16 +204,16 @@
 
         .formula {
             font-family: monospace;
-            font-size: 13pt;
+            font-size: 12pt;
             background: var(--paper-bg);
             color: var(--mineral-dark);
             border: 1px solid var(--wood-light);
-            padding: 12px 20px;
+            padding: 15px 20px;
             border-radius: 4px;
             display: block;
-            text-align: center;
             margin: 15px 0;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            text-align: left;
         }
 
         .stamp-box {
@@ -389,15 +389,45 @@
             <b>[重要警告]</b> 測量電阻（Ω）前，必須<b>先關閉電源開關</b>，以免燒毀電表。
         </div>
 
-        <p><span class="tag">實作測量記錄</span></p>
+        <p><span class="tag">理論公式</span> 在動手測量前，我們先試著計算與預測結果：</p>
+        <div class="formula">
+            <div style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <strong style="color: var(--wood-dark); font-size: 11pt;">串聯電阻 (手牽手)：</strong><br>
+                    <span style="font-size: 14pt; font-weight: bold;">R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub></span><br>
+                    <span style="font-size: 9.5pt; color: var(--mineral-slate);">(越串越大)</span>
+                </div>
+                <div style="flex: 1;">
+                    <strong style="color: var(--wood-dark); font-size: 11pt;">並聯電阻 (肩並肩)：</strong><br>
+                    <span style="font-size: 14pt; font-weight: bold;">1 / R<sub>總</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub></span><br>
+                    <span style="font-size: 9.5pt; color: var(--mineral-slate);">(越並越小，兩顆相同則減半)</span>
+                </div>
+            </div>
+        </div>
+
+        <p><span class="tag">示範接法</span> 參考下方圖示，將兩顆電阻接上麵包板：</p>
+        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+            <div class="reference-image-container" style="flex: 1; margin: 0;">
+                <img src="series.png" alt="串聯接法" style="max-height: 180px;">
+                <p style="font-size: 10pt; color: var(--mineral-slate); margin-top: 5px; margin-bottom: 0;">串聯示範圖</p>
+            </div>
+            <div class="reference-image-container" style="flex: 1; margin: 0;">
+                <img src="parallel.png" alt="並聯接法" style="max-height: 180px;">
+                <p style="font-size: 10pt; color: var(--mineral-slate); margin-top: 5px; margin-bottom: 0;">並聯示範圖</p>
+            </div>
+        </div>
+
+        <p><span class="tag">實證記錄</span> 先預測，再實測！</p>
         <table>
             <tr>
-                <th>接法</th>
-                <th>觀察亮度 (暗/中/亮)</th>
-                <th>電表讀數 (Ω)</th>
+                <th width="20%">接法</th>
+                <th width="25%">預測計算值 (Ω)</th>
+                <th width="25%">觀察亮度 (暗/中/亮)</th>
+                <th width="30%">電表實測值 (Ω)</th>
             </tr>
             <tr>
                 <td>單顆電阻</td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -405,17 +435,15 @@
                 <td>串聯 (手牽手)</td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>並聯 (肩並肩)</td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </table>
-
-        <div class="formula">
-            串聯總電阻 = R1 + R2 (阻值變大)
-        </div>
 
         <div class="footer">Page 4: 測量與數據</div>
     </div>
@@ -431,9 +459,9 @@
         <h2>5. 任務：摩斯密碼與雙色切換</h2>
         <p><b>按鈕開關任務：</b> 利用按鈕控制 LED 閃爍，試著按出你的英文縮寫。</p>
         
-        <p><span class="tag">第一個開關任務示範圖</span></p>
+        <p><span class="tag">示範電路圖</span></p>
         <div class="reference-image-container">
-            <img src="task_1.png" alt="任務一示範電路圖" style="max-height: 200px;">
+            <img src="task_1.png" alt="任務一示範電路圖" style="max-height: 190px;">
         </div>
 
         <div class="alert" style="border-left-color: var(--wood-dark); margin: 15px 0;">
@@ -443,7 +471,7 @@
         <h2>終極挑戰：紅綠燈控制系統</h2>
         <p>利用<b>滑動開關</b>切換「紅燈」與「綠燈」，絕對不能兩燈同時亮！</p>
         
-        <div class="drawing-area" style="min-height: 250px;">
+        <div class="drawing-area" style="min-height: 220px;">
             請在此畫出紅綠燈系統的電路圖
         </div>
 
