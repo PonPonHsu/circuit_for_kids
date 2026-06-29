@@ -137,12 +137,12 @@
             color: #5c4538;
         }
 
-        /* 純白作圖區 */
+        /* 白色底色的作圖區 */
         .drawing-area {
             border: 1px dashed var(--mineral-slate);
             flex-grow: 1;
             margin: 15px 0;
-            background: #ffffff; 
+            background: #ffffff; /* 強制白底 */
             border-radius: 4px;
             min-height: 150px;
         }
@@ -232,23 +232,11 @@
         <div class="analogy-box">
             <div class="card">
                 <h3 style="color:var(--mineral-dark)">水流系統</h3>
-                <p>抽水馬達 (推力)</p>
-                <p>↓</p>
-                <p>水管 (通道)</p>
-                <p>↓</p>
-                <p>水車 (消耗能量工作)</p>
-                <p>↓</p>
-                <p>窄管 (限制流速)</p>
+                <p>抽水馬達 (推力)</p><p>↓</p><p>水管 (通道)</p><p>↓</p><p>水車 (消耗能量工作)</p><p>↓</p><p>窄管 (限制流速)</p>
             </div>
             <div class="card">
                 <h3 style="color:var(--wood-dark)">電路系統</h3>
-                <p>電源 (電壓/推力)</p>
-                <p>↓</p>
-                <p>導線 (電流通道)</p>
-                <p>↓</p>
-                <p>LED 燈泡 (發光工作)</p>
-                <p>↓</p>
-                <p>電阻器 (限制電流)</p>
+                <p>電源 (電壓/推力)</p><p>↓</p><p>導線 (電流通道)</p><p>↓</p><p>LED 燈泡 (發光工作)</p><p>↓</p><p>電阻器 (限制電流)</p>
             </div>
         </div>
         
@@ -313,21 +301,9 @@
         <p style="color: var(--wood-dark); font-weight: 600;">「黑 0、棕 1、紅 2、橘 3、黃 4、綠 5、藍 6、紫 7、灰 8、白 9」</p>
         
         <table style="margin: 10px 0;">
-            <tr>
-                <th>顏色組合</th>
-                <th>計算方式</th>
-                <th>阻值</th>
-            </tr>
-            <tr>
-                <td>棕 黑 棕</td>
-                <td>1 - 0 - (1個0)</td>
-                <td>100 Ω</td>
-            </tr>
-            <tr>
-                <td>紅 紅 棕</td>
-                <td>2 - 2 - (1個0)</td>
-                <td>220 Ω</td>
-            </tr>
+            <tr><th>顏色組合</th><th>計算方式</th><th>阻值</th></tr>
+            <tr><td>棕 黑 棕</td><td>1 - 0 - (1個0)</td><td>100 Ω</td></tr>
+            <tr><td>紅 紅 棕</td><td>2 - 2 - (1個0)</td><td>220 Ω</td></tr>
         </table>
 
         <p><span class="tag">隨堂檢驗</span> 請寫出圖中四顆電阻的阻值：</p>
@@ -356,16 +332,14 @@
             <b>[重要警告]</b> 測量電阻（Ω）前，必須<b>先關閉電源開關</b>。
         </div>
 
-        <p><span class="tag">理論公式</span></p>
+        <p><span class="tag">理論公式</span> 在動手測量前，我們先試著計算與預測結果：</p>
         <div class="formula">
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark);">串聯電阻 (手牽手)：</strong><br>
-                    R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub>
+                    <strong style="color: var(--wood-dark);">串聯電阻：</strong><br>R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub>
                 </div>
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark);">並聯電阻 (肩並肩)：</strong><br>
-                    1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub>
+                    <strong style="color: var(--wood-dark);">並聯電阻：</strong><br>1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub>
                 </div>
             </div>
         </div>
@@ -384,8 +358,47 @@
 
         <p><span class="tag">實證記錄</span></p>
         <table>
-            <tr>
-                <th width="20%">接法</th>
-                <th width="25%">預測計算值 (Ω)</th>
-                <th width="25%">觀察亮度 (暗/中/亮)</th>
-                <th width="3
+            <tr><th>接法</th><th>預測計算值 (Ω)</th><th>觀察亮度</th><th>電表實測值 (Ω)</th></tr>
+            <tr><td>單顆電阻</td><td></td><td></td><td></td></tr>
+            <tr><td>串聯</td><td></td><td></td><td></td></tr>
+            <tr><td>並聯</td><td></td><td></td><td></td></tr>
+        </table>
+
+        <div class="footer">Page 4: 測量與數據</div>
+    </div>
+
+    <div class="topic-page">
+        <div class="header">
+            <img src="logo.jpg" class="page-logo" alt="Logo">
+            <div class="header-right">
+                <h1 class="main-title">控制：電力閘門</h1>
+            </div>
+        </div>
+
+        <h2>5. 任務：摩斯密碼與雙色切換</h2>
+        <p><b>按鈕開關任務：</b> 利用按鈕控制 LED 閃爍，試著按出你的英文縮寫。</p>
+        
+        <p><span class="tag">示範電路圖</span></p>
+        <div class="reference-image-container">
+            <img src="task_1.png" alt="任務一示範電路圖" style="max-height: 190px;">
+        </div>
+
+        <div class="alert" style="border-left-color: var(--wood-dark); margin: 15px 0;">
+            <b>[設計密技]</b> 為了避免短路，按鈕開關建議採用「對角線接法」最為穩定。
+        </div>
+
+        <h2>終極挑戰：紅綠燈控制系統</h2>
+        <p>利用<b>滑動開關</b>切換「紅燈」與「綠燈」，絕對不能兩燈同時亮！</p>
+        
+        <p><span class="tag">電路規劃區</span></p>
+        <div class="drawing-area" style="min-height: 380px;"></div>
+
+        <div style="display:flex; justify-content: flex-end; align-items: flex-end; margin-top: 20px;">
+            <p style="font-size: 13pt; color: var(--wood-dark); font-weight: 600; margin: 0;">恭喜完成第一堂電路課！</p>
+        </div>
+
+        <div class="footer">Page 5: 實戰與結業</div>
+    </div>
+
+</body>
+</html>
