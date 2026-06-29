@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電路學講義 (吾思質感版)</title>
+    <title>電路學講義</title>
     <style>
         /* 1. 全域列印與礦物/木質色彩設定 */
         :root {
-            --mineral-dark: #4a5759;   /* 深板岩灰 (主標題/線條) */
-            --mineral-slate: #6b7a8f;  /* 藍灰色 (次標題) */
-            --wood-dark: #8a7360;      /* 深木色 (重點文字/邊框) */
-            --wood-light: #e6dfd3;     /* 淺木色/米色 (表格邊框/背景) */
-            --paper-bg: #fdfbf7;       /* 紙張底色 (區塊背景) */
-            --accent-terra: #b87355;   /* 赤陶色 (警告/強調色) */
+            --mineral-dark: #4a5759;
+            --mineral-slate: #6b7a8f;
+            --wood-dark: #8a7360;
+            --wood-light: #e6dfd3;
+            --paper-bg: #fdfbf7;
+            --accent-terra: #b87355;
             --text-main: #333333;
             --text-muted: #666666;
         }
@@ -20,7 +20,7 @@
         * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
         body {
-            background-color: #d1d5db; /* 預覽時的網頁背景 */
+            background-color: #d1d5db; 
             margin: 0;
             padding: 0;
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
@@ -30,7 +30,7 @@
         /* A4 紙張容器 */
         .topic-page {
             width: 210mm;
-            min-height: 297mm;
+            height: 297mm;
             padding: 20mm;
             margin: 10mm auto;
             background: white;
@@ -41,16 +41,19 @@
             overflow: hidden;
         }
 
-        /* 列印分頁控制 */
+        @page { size: A4; margin: 0; }
+        
         @media print {
-            body { background: none; }
+            body { background: white; margin: 0; }
             .topic-page {
                 margin: 0;
                 box-shadow: none;
-                width: 100%;
-                height: 100%;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
                 break-after: page;
             }
+            .topic-page:last-child { page-break-after: auto; break-after: auto; }
         }
 
         /* 2. 標題與 LOGO 資訊列 */
@@ -63,15 +66,8 @@
             margin-bottom: 25px;
         }
 
-        .page-logo {
-            height: 45px;
-            object-fit: contain;
-        }
-
-        .header-right {
-            text-align: right;
-        }
-
+        .page-logo { height: 45px; object-fit: contain; }
+        .header-right { text-align: right; }
         .main-title {
             font-size: 20pt;
             color: var(--mineral-dark);
@@ -79,7 +75,6 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
-
         .student-info {
             font-size: 11pt;
             color: var(--text-muted);
@@ -87,7 +82,6 @@
             gap: 15px;
             justify-content: flex-end;
         }
-
         .underline {
             border-bottom: 1px solid var(--text-muted);
             min-width: 80px;
@@ -95,25 +89,25 @@
             text-align: center;
         }
 
-        /* 3. 內容元件樣式 (簡約風格) */
+        /* 3. 內容元件樣式 */
         h2 {
             font-size: 16pt;
             color: var(--wood-dark);
             border-left: 4px solid var(--wood-dark);
             padding-left: 12px;
-            margin: 30px 0 20px;
+            margin: 25px 0 15px;
             font-weight: 600;
         }
 
         h3 {
             font-size: 12pt;
             color: var(--mineral-slate);
-            margin-top: 20px;
+            margin-top: 15px;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
-        p, li { font-size: 11.5pt; line-height: 1.8; margin-bottom: 10px; }
+        p, li { font-size: 11.5pt; line-height: 1.8; margin-bottom: 8px; }
 
         .analogy-box {
             background: var(--paper-bg);
@@ -123,52 +117,46 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .card {
             background: white;
             border: 1px solid var(--wood-light);
             border-radius: 4px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
         .alert {
             background: #fcf9f5;
             border-left: 4px solid var(--accent-terra);
-            padding: 15px 20px;
-            margin: 20px 0;
+            padding: 12px 20px;
+            margin: 15px 0;
             border-radius: 0 4px 4px 0;
             color: #5c4538;
         }
 
+        /* 純白作圖區 */
         .drawing-area {
             border: 1px dashed var(--mineral-slate);
             flex-grow: 1;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--mineral-slate);
-            background: var(--paper-bg);
+            margin: 15px 0;
+            background: #ffffff; 
             border-radius: 4px;
-            min-height: 200px;
-            font-size: 10pt;
-            letter-spacing: 1px;
+            min-height: 150px;
         }
-        
+
         .reference-image-container {
             text-align: center;
-            margin: 20px 0;
+            margin: 10px 0;
         }
         
         .reference-image-container img {
             max-width: 100%;
-            max-height: 350px;
             border: 1px solid var(--wood-light);
             border-radius: 4px;
-            padding: 10px;
+            padding: 8px;
             background: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             object-fit: contain;
@@ -178,56 +166,38 @@
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
-            font-size: 11pt;
+            font-size: 10.5pt;
         }
 
         th, td {
             border: 1px solid var(--wood-light);
-            padding: 10px 12px;
+            padding: 8px 10px;
             text-align: center;
         }
 
-        th { 
-            background: var(--paper-bg); 
-            color: var(--wood-dark); 
-            font-weight: 600;
-        }
+        th { background: var(--paper-bg); color: var(--wood-dark); font-weight: 600; }
 
         .footer {
             margin-top: auto;
             font-size: 9pt;
             color: var(--text-muted);
             text-align: center;
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid var(--wood-light);
         }
 
         .formula {
             font-family: monospace;
-            font-size: 12pt;
+            font-size: 11pt;
             background: var(--paper-bg);
             color: var(--mineral-dark);
             border: 1px solid var(--wood-light);
-            padding: 15px 20px;
+            padding: 12px 15px;
             border-radius: 4px;
             display: block;
-            margin: 15px 0;
+            margin: 10px 0;
             letter-spacing: 0.5px;
             text-align: left;
-        }
-
-        .stamp-box {
-            border: 1px dashed var(--mineral-slate);
-            width: 110px;
-            height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10pt;
-            color: var(--mineral-slate);
-            margin: 20px 0;
-            background: var(--paper-bg);
-            border-radius: 4px;
         }
 
         .tag {
@@ -246,7 +216,7 @@
 
     <div class="topic-page">
         <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="吾思 Logo">
+            <img src="logo.jpg" class="page-logo" alt="Logo">
             <div class="header-right">
                 <h1 class="main-title">基礎電路實作</h1>
                 <div class="student-info">
@@ -257,7 +227,7 @@
         </div>
         
         <h2>1. 課前暖身：電流是什麼？</h2>
-        <p>想像一下家裡的水管系統。電路就像水路，讓能量在其中流動：</p>
+        <p>電流在電路中的運作，可以藉由簡單的比喻來理解：</p>
         
         <div class="analogy-box">
             <div class="card">
@@ -268,11 +238,11 @@
                 <p>↓</p>
                 <p>水車 (消耗能量工作)</p>
                 <p>↓</p>
-                <p>窄管/減速丘 (限制流速)</p>
+                <p>窄管 (限制流速)</p>
             </div>
             <div class="card">
-                <h3 style="color:var(--wood-dark)">電流系統</h3>
-                <p>電源模組 (電壓/推力)</p>
+                <h3 style="color:var(--wood-dark)">電路系統</h3>
+                <p>電源 (電壓/推力)</p>
                 <p>↓</p>
                 <p>導線 (電流通道)</p>
                 <p>↓</p>
@@ -283,15 +253,15 @@
         </div>
         
         <p style="margin-top:40px;"><span class="tag">思考任務</span></p>
-        <p>如果水管破了，水會流失；那如果電線斷了，電流會發生什麼事？</p>
-        <div class="drawing-area" style="min-height: 100px;">寫下或畫下你的想法</div>
+        <p>如果電線斷了，電流會發生什麼事？請在此處繪製你的想法：</p>
+        <div class="drawing-area" style="min-height: 120px;"></div>
 
-        <div class="footer">Page 1: 引言與比喻</div>
+        <div class="footer">Page 1: 引言與基礎概念</div>
     </div>
 
     <div class="topic-page">
         <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="吾思 Logo">
+            <img src="logo.jpg" class="page-logo" alt="Logo">
             <div class="header-right">
                 <h1 class="main-title">任務一：點亮第一道光</h1>
             </div>
@@ -300,7 +270,12 @@
         <h2>2. 基本電路實作</h2>
         <div class="alert">
             <b>[安全提示]</b> LED 長腳接正極(+)，短腳接負極(-)。<br>
-            必須接上電阻器，否則 LED 會像被強水柱沖毀的水車一樣燒毀。
+            必須串聯電阻器，否則 LED 會燒毀。
+        </div>
+
+        <p><span class="tag">示範電路圖</span> 請參考下方圖示進行接線：</p>
+        <div class="reference-image-container">
+            <img src="task_1.png" alt="任務一示範電路圖" style="max-height: 380px;">
         </div>
 
         <p><span class="tag">操作步驟</span></p>
@@ -310,11 +285,6 @@
             <li>LED 短腳接回電源軌黑線(-)。</li>
         </ol>
 
-        <p><span class="tag">電路規劃</span></p>
-        <div class="drawing-area" style="min-height: 350px;">
-            請參考示範圖，在此畫出你的麵包板接線草圖
-        </div>
-
         <p><span class="tag">觀察記錄</span></p>
         <p>成功發光了嗎？ □ 是  □ 否</p>
         <div class="footer">Page 2: 基礎實作</div>
@@ -322,14 +292,14 @@
 
     <div class="topic-page">
         <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="吾思 Logo">
+            <img src="logo.jpg" class="page-logo" alt="Logo">
             <div class="header-right">
                 <h1 class="main-title">解析：電流的通道</h1>
             </div>
         </div>
 
         <h2>3. 麵包板與電阻秘密</h2>
-        <h3>秘密一：麵包板底下長怎樣？</h3>
+        <h3>秘密一：麵包板結構</h3>
         <ul>
             <li><b>中央零件區：</b> 每一橫排 5 個孔內部相連。</li>
             <li><b>兩側電源軌：</b> 整排直向一路相通。</li>
@@ -342,7 +312,7 @@
         <h3>秘密二：電阻色碼口訣</h3>
         <p style="color: var(--wood-dark); font-weight: 600;">「黑 0、棕 1、紅 2、橘 3、黃 4、綠 5、藍 6、紫 7、灰 8、白 9」</p>
         
-        <table>
+        <table style="margin: 10px 0;">
             <tr>
                 <th>顏色組合</th>
                 <th>計算方式</th>
@@ -366,10 +336,7 @@
         </div>
         
         <p style="text-align: center; font-size: 11pt; margin-top: 15px;">
-            1. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp;
-            2. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp;
-            3. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp;
-            4. _________ Ω
+            1. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp; 2. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp; 3. _________ Ω &nbsp;&nbsp;&nbsp;&nbsp; 4. _________ Ω
         </p>
 
         <div class="footer">Page 3: 原理解析</div>
@@ -377,7 +344,7 @@
 
     <div class="topic-page">
         <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="吾思 Logo">
+            <img src="logo.jpg" class="page-logo" alt="Logo">
             <div class="header-right">
                 <h1 class="main-title">測量：電流特派員</h1>
             </div>
@@ -386,102 +353,39 @@
         <h2>4. 三用電表與串並聯規律</h2>
         <div class="alert" style="border-left-color: var(--mineral-slate);">
             <b>[測量守則]</b> 量電壓用「並聯」，量電流用「串聯」。<br>
-            <b>[重要警告]</b> 測量電阻（Ω）前，必須<b>先關閉電源開關</b>，以免燒毀電表。
+            <b>[重要警告]</b> 測量電阻（Ω）前，必須<b>先關閉電源開關</b>。
         </div>
 
-        <p><span class="tag">理論公式</span> 在動手測量前，我們先試著計算與預測結果：</p>
+        <p><span class="tag">理論公式</span></p>
         <div class="formula">
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark); font-size: 11pt;">串聯電阻：</strong><br>
-                    <span style="font-size: 14pt; font-weight: bold;">R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub></span><br>
-                    <span style="font-size: 9.5pt; color: var(--mineral-slate);">(越串越大)</span>
+                    <strong style="color: var(--wood-dark);">串聯電阻 (手牽手)：</strong><br>
+                    R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub>
                 </div>
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark); font-size: 11pt;">並聯電阻：</strong><br>
-                    <span style="font-size: 14pt; font-weight: bold;">1 / R<sub>總</sub> = 1 / R<sub>1</sub> + 1 / R<sub>2</sub></span><br>
-                    <span style="font-size: 9.5pt; color: var(--mineral-slate);">(越並越小，兩顆相同則減半)</span>
+                    <strong style="color: var(--wood-dark);">並聯電阻 (肩並肩)：</strong><br>
+                    1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub>
                 </div>
             </div>
         </div>
 
-        <p><span class="tag">示範接法</span> 參考下方圖示，將兩顆電阻接上麵包板：</p>
-        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+        <p><span class="tag">示範接法</span></p>
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
             <div class="reference-image-container" style="flex: 1; margin: 0;">
                 <img src="series.png" alt="串聯接法" style="max-height: 180px;">
-                <p style="font-size: 10pt; color: var(--mineral-slate); margin-top: 5px; margin-bottom: 0;">串聯示範圖</p>
+                <p style="font-size: 9pt; color: var(--mineral-slate);">串聯示範</p>
             </div>
             <div class="reference-image-container" style="flex: 1; margin: 0;">
                 <img src="parallel.png" alt="並聯接法" style="max-height: 180px;">
-                <p style="font-size: 10pt; color: var(--mineral-slate); margin-top: 5px; margin-bottom: 0;">並聯示範圖</p>
+                <p style="font-size: 9pt; color: var(--mineral-slate);">並聯示範</p>
             </div>
         </div>
 
-        <p><span class="tag">實證記錄</span> 先預測，再實測！</p>
+        <p><span class="tag">實證記錄</span></p>
         <table>
             <tr>
                 <th width="20%">接法</th>
                 <th width="25%">預測計算值 (Ω)</th>
                 <th width="25%">觀察亮度 (暗/中/亮)</th>
-                <th width="30%">電表實測值 (Ω)</th>
-            </tr>
-            <tr>
-                <td>單顆電阻</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>串聯</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>並聯</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-
-        <div class="footer">Page 4: 測量與數據</div>
-    </div>
-
-    <div class="topic-page">
-        <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="吾思 Logo">
-            <div class="header-right">
-                <h1 class="main-title">控制：電力閘門</h1>
-            </div>
-        </div>
-
-        <h2>5. 任務：摩斯密碼與雙色切換</h2>
-        <p><b>按鈕開關任務：</b> 利用按鈕控制 LED 閃爍，試著按出你的英文縮寫。</p>
-        
-        <p><span class="tag">示範電路圖</span></p>
-        <div class="reference-image-container">
-            <img src="task_1.png" alt="任務一示範電路圖" style="max-height: 190px;">
-        </div>
-
-        <div class="alert" style="border-left-color: var(--wood-dark); margin: 15px 0;">
-            <b>[設計密技]</b> 為了避免短路，按鈕開關建議採用「對角線接法」最為穩定。
-        </div>
-
-        <h2>終極挑戰：紅綠燈控制系統</h2>
-        <p>利用<b>滑動開關</b>切換「紅燈」與「綠燈」，絕對不能兩燈同時亮！</p>
-        
-        <div class="drawing-area" style="min-height: 220px;">
-            請在此畫出紅綠燈系統的電路圖
-        </div>
-
-        <div style="display:flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
-            <div class="stamp-box" style="width: 100px; height: 100px; margin: 0;">老師驗收章</div>
-            <p style="font-size: 13pt; color: var(--wood-dark); font-weight: 600; margin: 0;">恭喜完成第一堂電路課！</p>
-        </div>
-
-        <div class="footer">Page 5: 實戰與結業</div>
-    </div>
-
-</body>
-</html>
+                <th width="3
