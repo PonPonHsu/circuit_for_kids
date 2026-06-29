@@ -142,7 +142,7 @@
             border: 1px dashed var(--mineral-slate);
             flex-grow: 1;
             margin: 15px 0;
-            background: #ffffff; /* 強制白底 */
+            background: #ffffff; 
             border-radius: 4px;
             min-height: 150px;
         }
@@ -301,9 +301,21 @@
         <p style="color: var(--wood-dark); font-weight: 600;">「黑 0、棕 1、紅 2、橘 3、黃 4、綠 5、藍 6、紫 7、灰 8、白 9」</p>
         
         <table style="margin: 10px 0;">
-            <tr><th>顏色組合</th><th>計算方式</th><th>阻值</th></tr>
-            <tr><td>棕 黑 棕</td><td>1 - 0 - (1個0)</td><td>100 Ω</td></tr>
-            <tr><td>紅 紅 棕</td><td>2 - 2 - (1個0)</td><td>220 Ω</td></tr>
+            <tr>
+                <th>顏色組合</th>
+                <th>計算方式</th>
+                <th>阻值</th>
+            </tr>
+            <tr>
+                <td>棕 黑 棕</td>
+                <td>1 - 0 - (1個0)</td>
+                <td>100 Ω</td>
+            </tr>
+            <tr>
+                <td>紅 紅 棕</td>
+                <td>2 - 2 - (1個0)</td>
+                <td>220 Ω</td>
+            </tr>
         </table>
 
         <p><span class="tag">隨堂檢驗</span> 請寫出圖中四顆電阻的阻值：</p>
@@ -336,10 +348,12 @@
         <div class="formula">
             <div style="display: flex; gap: 20px;">
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark);">串聯電阻：</strong><br>R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub>
+                    <strong style="color: var(--wood-dark);">串聯電阻 (手牽手)：</strong><br>
+                    R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub>
                 </div>
                 <div style="flex: 1;">
-                    <strong style="color: var(--wood-dark);">並聯電阻：</strong><br>1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub>
+                    <strong style="color: var(--wood-dark);">並聯電阻 (肩並肩)：</strong><br>
+                    1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub>
                 </div>
             </div>
         </div>
@@ -358,10 +372,21 @@
 
         <p><span class="tag">實證記錄</span></p>
         <table>
-            <tr><th>接法</th><th>預測計算值 (Ω)</th><th>觀察亮度</th><th>電表實測值 (Ω)</th></tr>
-            <tr><td>單顆電阻</td><td></td><td></td><td></td></tr>
-            <tr><td>串聯</td><td></td><td></td><td></td></tr>
-            <tr><td>並聯</td><td></td><td></td><td></td></tr>
+            <tr>
+                <th width="20%">接法</th>
+                <th width="25%">預測計算值 (Ω)</th>
+                <th width="25%">觀察亮度</th>
+                <th width="30%">電表實測值 (Ω)</th>
+            </tr>
+            <tr>
+                <td>單顆電阻</td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>串聯</td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>並聯</td><td></td><td></td><td></td>
+            </tr>
         </table>
 
         <div class="footer">Page 4: 測量與數據</div>
@@ -392,10 +417,6 @@
         
         <p><span class="tag">電路規劃區</span></p>
         <div class="drawing-area" style="min-height: 380px;"></div>
-
-        <div style="display:flex; justify-content: flex-end; align-items: flex-end; margin-top: 20px;">
-            <p style="font-size: 13pt; color: var(--wood-dark); font-weight: 600; margin: 0;">恭喜完成第一堂電路課！</p>
-        </div>
 
         <div class="footer">Page 5: 實戰與結業</div>
     </div>
