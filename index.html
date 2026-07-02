@@ -35,11 +35,9 @@
     </style>
 </head>
 <body>
+
     <div class="topic-page">
-        <div class="header">
-            <img src="logo.jpg" class="page-logo" alt="Logo">
-            <div class="header-right"><h1 class="main-title">基礎電路實作</h1><div class="student-info">姓名：<span class="underline"></span> 日期：<span class="underline"></span></div></div>
-        </div>
+        <div class="header"><img src="logo.jpg" class="page-logo" alt="Logo"><div class="header-right"><h1 class="main-title">基礎電路實作</h1><div class="student-info">姓名：<span class="underline"></span> 日期：<span class="underline"></span></div></div></div>
         <h2>1. 課前暖身：電流是什麼？</h2>
         <p>電流在電路中的運作，可類比為水流系統：</p>
         <div class="analogy-box">
@@ -50,6 +48,7 @@
         <div class="drawing-area" style="min-height: 120px;"></div>
         <div class="footer">Page 1: 引言與基礎概念</div>
     </div>
+
     <div class="topic-page">
         <div class="header"><img src="logo.jpg" class="page-logo" alt="Logo"><div class="header-right"><h1 class="main-title">任務一：點亮第一道光</h1></div></div>
         <h2>2. 基本電路實作</h2>
@@ -61,5 +60,29 @@
         <p><span class="tag">觀察記錄</span> 成功發光了嗎？ □ 是  □ 否</p>
         <div class="footer">Page 2: 基礎實作</div>
     </div>
-    </body>
-</html>
+
+    <div class="topic-page">
+        <div class="header"><img src="logo.jpg" class="page-logo" alt="Logo"><div class="header-right"><h1 class="main-title">解析：電流的通道</h1></div></div>
+        <h2>3. 麵包板與電阻秘密</h2>
+        <h3>秘密一：麵包板結構</h3>
+        <ul><li><b>中央零件區：</b> 每一橫排 5 個孔內部相連。</li><li><b>兩側電源軌：</b> 整排直向一路相通。</li></ul>
+        <div class="reference-image-container"><img src="breadboard.png" alt="麵包板原理圖" style="max-height: 160px;"></div>
+        <h3>秘密二：電阻色碼口訣</h3>
+        <p style="color: var(--wood-dark); font-weight: 600;">「黑 0、棕 1、紅 2、橘 3、黃 4、綠 5、藍 6、紫 7、灰 8、白 9」</p>
+        <table>
+            <tr><th>顏色組合</th><th>計算方式</th><th>阻值</th></tr>
+            <tr><td>棕 黑 棕</td><td>1-0-(1個0)</td><td>100 Ω</td></tr>
+            <tr><td>紅 紅 棕</td><td>2-2-(1個0)</td><td>220 Ω</td></tr>
+        </table>
+        <p><span class="tag">隨堂檢驗</span> 請寫出圖中四顆電阻的阻值：</p>
+        <div class="reference-image-container"><img src="re_exercise.png" alt="電阻色碼練習題" style="max-height: 120px;"></div>
+        <p style="text-align: center; font-size: 11pt; margin-top: 15px;">1. ___Ω &nbsp; 2. ___Ω &nbsp; 3. ___Ω &nbsp; 4. ___Ω</p>
+        <div class="footer">Page 3: 原理解析</div>
+    </div>
+
+    <div class="topic-page">
+        <div class="header"><img src="logo.jpg" class="page-logo" alt="Logo"><div class="header-right"><h1 class="main-title">測量：電流特派員</h1></div></div>
+        <h2>4. 三用電表與串並聯規律</h2>
+        <div class="alert" style="border-left-color: var(--mineral-slate);"><b>[測量守則]</b> 量電壓用「並聯」，量電流用「串聯」。<br><b>[重要警告]</b> 測量電阻（Ω）前，必須<b>先關閉電源開關</b>。</div>
+        <p><span class="tag">理論公式</span></p>
+        <div class="formula">
