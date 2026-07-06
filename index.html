@@ -8,9 +8,9 @@
         :root { --mineral-dark: #4a5759; --mineral-slate: #6b7a8f; --wood-dark: #8a7360; --wood-light: #e6dfd3; --paper-bg: #fdfbf7; --accent-terra: #b87355; --text-main: #333333; --text-muted: #666666; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         body { background-color: #d1d5db; margin: 0; padding: 0; font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; color: var(--text-main); }
-        .topic-page { width: 210mm; height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; overflow: hidden; page-break-after: always; break-after: page; }
+        .topic-page { width: 210mm; height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; overflow: hidden; }
         @page { size: A4; margin: 0; }
-        @media print { body { background: white; margin: 0; } .topic-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; } .topic-page:last-child { page-break-after: auto; break-after: auto; } }
+        @media print { body { background: white; margin: 0; } .topic-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; break-after: page; } .topic-page:last-child { page-break-after: auto; break-after: auto; } }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--mineral-dark); padding-bottom: 15px; margin-bottom: 25px; }
         .page-logo { height: 45px; object-fit: contain; }
         .header-right { text-align: right; }
