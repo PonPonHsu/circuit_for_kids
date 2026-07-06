@@ -8,9 +8,9 @@
         :root { --mineral-dark: #4a5759; --mineral-slate: #6b7a8f; --wood-dark: #8a7360; --wood-light: #e6dfd3; --paper-bg: #fdfbf7; --accent-terra: #b87355; --text-main: #333333; --text-muted: #666666; }
         * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         body { background-color: #d1d5db; margin: 0; padding: 0; font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; color: var(--text-main); }
-        .topic-page { width: 210mm; height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; overflow: hidden; }
+        .topic-page { width: 210mm; height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; overflow: hidden; page-break-after: always; break-after: page; }
         @page { size: A4; margin: 0; }
-        @media print { body { background: white; margin: 0; } .topic-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; break-after: page; } .topic-page:last-child { page-break-after: auto; break-after: auto; } }
+        @media print { body { background: white; margin: 0; } .topic-page { margin: 0; box-shadow: none; width: 210mm; height: 297mm; } .topic-page:last-child { page-break-after: auto; break-after: auto; } }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--mineral-dark); padding-bottom: 15px; margin-bottom: 25px; }
         .page-logo { height: 45px; object-fit: contain; }
         .header-right { text-align: right; }
@@ -97,38 +97,4 @@
                 <p style="font-size: 9pt; color: var(--mineral-dark); font-weight: bold; margin: 5px 0 0 0;">串聯 (階梯式下降)</p>
             </div>
             <div class="reference-image-container" style="flex: 1; margin: 0; padding: 10px; background: white; border: 1px solid var(--wood-light); border-radius: 4px;">
-                <img src="parallel_analogy.jpg" alt="並聯電路示意圖" style="max-height: 105px; border: none; box-shadow: none;">
-                <p style="font-size: 9pt; color: var(--mineral-dark); font-weight: bold; margin: 5px 0 0 0;">並聯 (多條支路)</p>
-            </div>
-        </div>
-
-        <p><span class="tag">示範接法</span> 參考下方圖示接線，並觀察 LED 亮度與電表數值：</p>
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <div class="reference-image-container" style="flex: 1; margin: 0;"><img src="series.png" alt="串聯接法" style="max-height: 130px;"><p style="font-size: 9pt; margin: 2px 0;">串聯示範</p></div>
-            <div class="reference-image-container" style="flex: 1; margin: 0;"><img src="parallel.png" alt="並聯接法" style="max-height: 130px;"><p style="font-size: 9pt; margin: 2px 0;">並聯示範</p></div>
-        </div>
-        
-        <table style="margin: 5px 0;">
-            <tr><th>接法</th><th>預測計算值(Ω)</th><th>觀察亮度</th><th>電表實測值(Ω)</th></tr>
-            <tr><td>單顆</td><td></td><td></td><td></td></tr>
-            <tr><td>串聯</td><td>R<sub>總</sub> = R<sub>1</sub> + R<sub>2</sub></td><td></td><td></td></tr>
-            <tr><td>並聯</td><td>1/R<sub>總</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub></td><td></td><td></td></tr>
-        </table>
-        <div class="footer">Page 4: 測量與數據</div>
-    </div>
-
-    <div class="topic-page">
-        <div class="header"><img src="logo.jpg" class="page-logo" alt="Logo"><div class="header-right"><h1 class="main-title">控制：電力閘門</h1></div></div>
-        <h2>5. 任務：摩斯密碼與雙色切換</h2>
-        <p><b>按鈕開關任務：</b> 利用按鈕控制 LED 閃爍，試著按出你的英文縮寫。</p>
-        <div class="reference-image-container"><img src="task_1.png" alt="任務一示範電路圖" style="max-height: 190px;"></div>
-        <div class="alert" style="border-left-color: var(--wood-dark); margin: 15px 0;"><b>[設計密技]</b> 按鈕開關建議採用「對角線接法」最穩定。</div>
-        <h2>終極挑戰：紅綠燈控制系統</h2>
-        <p>利用<b>滑動開關</b>切換「紅燈」與「綠燈」，絕對不能兩燈同時亮！</p>
-        <p><span class="tag">電路規劃區</span></p>
-        <div class="drawing-area" style="min-height: 300px;"></div>
-        <div class="footer">Page 5: 實戰與結業</div>
-    </div>
-
-</body>
-</html>
+                <img src="parallel_analogy.jpg
