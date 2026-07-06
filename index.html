@@ -2,65 +2,64 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>電路學講義 (五頁版)</title>
+    <title>電路學講義</title>
     <style>
-        :root { --mineral-dark: #4a5759; --mineral-slate: #6b7a8f; --wood-dark: #8a7360; --wood-light: #e6dfd3; --paper-bg: #fdfbf7; --accent-terra: #b87355; --text-main: #333333; --text-muted: #666666; }
-        body { background-color: #d1d5db; margin: 0; padding: 0; font-family: sans-serif; }
-        .page { 
-            width: 210mm; 
-            height: 297mm; 
-            padding: 20mm; 
-            margin: 10mm auto; 
-            background: white; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            display: flex; 
-            flex-direction: column;
-            position: relative;
-        }
-        @media print {
-            body { background: none; }
-            .page { margin: 0; box-shadow: none; page-break-after: always; }
-        }
-        /* 頁尾強制固定在底部 */
+        :root { --mineral-dark: #4a5759; --wood-dark: #8a7360; --wood-light: #e6dfd3; --paper-bg: #fdfbf7; --accent-terra: #b87355; --text-main: #333333; }
+        * { box-sizing: border-box; }
+        body { background-color: #d1d5db; margin: 0; padding: 0; font-family: "PingFang TC", sans-serif; }
+        .topic-page { width: 210mm; height: 297mm; padding: 20mm; margin: 10mm auto; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; page-break-after: always; }
+        @media print { body { background: none; } .topic-page { margin: 0; box-shadow: none; } }
+        .header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--mineral-dark); padding-bottom: 10px; margin-bottom: 20px; }
         .footer { margin-top: auto; border-top: 1px solid #ddd; padding-top: 10px; text-align: center; color: #888; font-size: 9pt; }
-        /* 其他樣式保持不變 */
-        h2 { font-size: 16pt; color: #8a7360; border-left: 4px solid #8a7360; padding-left: 10px; margin-bottom: 20px; }
+        h2 { font-size: 16pt; color: var(--wood-dark); border-left: 4px solid var(--wood-dark); padding-left: 10px; margin-bottom: 20px; }
         .drawing-area { border: 1px dashed #6b7a8f; background: #ffffff; min-height: 200px; margin: 15px 0; border-radius: 4px; }
+        .alert { background: #fcf9f5; border-left: 4px solid var(--accent-terra); padding: 10px; margin: 15px 0; }
+        .analogy-box { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .reference-image { text-align: center; margin: 10px 0; }
+        .reference-image img { max-width: 100%; border: 1px solid var(--wood-light); padding: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="page">
-        <h2>1. 基礎概念</h2>
-        <div class="drawing-area"></div>
+    <div class="topic-page">
+        <div class="header"><h1>基礎電路實作</h1></div>
+        <h2>1. 課前暖身：電流與電壓</h2>
+        <div class="analogy-box">
+            <div><h3>水流比喻</h3><p>電壓像水壓，電流像水流。</p></div>
+            <div><h3>電路概念</h3><p>電源推動電荷流動。</p></div>
+        </div>
+        <div class="reference-image">
+            <img src="basic_analogy.jpg" alt="基本電路概念圖" style="max-height: 250px;">
+        </div>
         <div class="footer">Page 1</div>
     </div>
 
-    <div class="page">
-        <h2>2. 基礎實作</h2>
+    <div class="topic-page">
+        <div class="header"><h1>任務一：點亮 LED</h1></div>
+        <h2>2. 基本電路實作</h2>
+        <div class="alert">建議使用 220Ω 至 1kΩ 電阻以保護 LED。</div>
+        <div class="reference-image"><img src="task_1.png" alt="接線圖"></div>
+        <ol><li>接電源紅線。</li><li>串接電阻。</li><li>LED 長短腳確認。</li></ol>
         <div class="footer">Page 2</div>
     </div>
 
-    <div class="page">
-        <h2>3. 麵包板與色碼</h2>
+    <div class="topic-page">
+        <div class="header"><h1>解析：電流通道</h1></div>
+        <h2>3. 麵包板結構與色碼</h2>
+        <div class="reference-image"><img src="breadboard.png" alt="麵包板結構"></div>
         <div class="footer">Page 3</div>
     </div>
 
-    <div class="page">
-        <h2>4. 測量與串並聯</h2>
-        <div style="flex: 1;">
-            <div style="margin-bottom: 30px;">[理論公式]</div>
-            <div style="display: flex; gap: 20px;">
-                <div style="flex:1;">[串聯圖示]</div>
-                <div style="flex:1;">[並聯圖示]</div>
-            </div>
-            <div style="margin-top: 40px;">[表格]</div>
-        </div>
+    <div class="topic-page">
+        <div class="header"><h1>測量：電流特派員</h1></div>
+        <h2>4. 串聯與並聯</h2>
+        <div class="reference-image"><img src="series_analogy.jpg" alt="串聯"><img src="parallel_analogy.jpg" alt="並聯"></div>
         <div class="footer">Page 4</div>
     </div>
 
-    <div class="page">
-        <h2>5. 結業任務</h2>
+    <div class="topic-page">
+        <div class="header"><h1>控制：電力閘門</h1></div>
+        <h2>5. 結業挑戰</h2>
         <div class="drawing-area"></div>
         <div class="footer">Page 5</div>
     </div>
